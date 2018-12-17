@@ -19,9 +19,9 @@ def h(board) :
     return 0
 
 
-def minvalue(board,prof,alpha=-1*inf,beta=inf) :
+def minvalue(board,action,prof,alpha=-1*inf,beta=inf) :
     if prof==0 :
-        return h(board)
+        return h(action)
     for s in board.getPossibleColumns() :
         board_bis=deepcopy(board)
         board_bis.play(1,s)
@@ -33,14 +33,14 @@ def minvalue(board,prof,alpha=-1*inf,beta=inf) :
     return alpha,choice
 
 
-def maxvalue(board,prof,alpha=-1*inf,beta=inf) :
+def maxvalue(board,action,prof,alpha=-1*inf,beta=inf) :
     if prof==0 :
-        return h(board)
+        return h(action)
     for s in board.getPossibleColumns() :
         board_bis=deepcopy(board)
         board_bis.play(-1,s)
-        if maxvalue(board,prof-1,alpha,beta)>=alpha :
-            alpha=maxvalue(board,prof-1,alpha,beta)
+        if maxvalue(board_bis,s,prof-1,alpha,beta)>=alpha :
+            alpha=maxvalue(board_bis,s,prof-1,alpha,beta)
             choice=s
         if alpha>=beta :
             return beta
