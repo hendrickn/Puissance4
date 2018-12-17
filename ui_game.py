@@ -75,7 +75,7 @@ class UIGame(Game):
 
         self.text = ''
         try:
-            col = self.getColumn(player)
+            col = self.getColumnbis(player)
         except multiprocessing.context.TimeoutError as e:
             reason = "{} took too long".format(player.name)
             logging.error(reason)

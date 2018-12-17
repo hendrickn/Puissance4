@@ -61,7 +61,7 @@ class Game(object):
             print("It's a draw!")
 
     @utils.timeout(0.5)
-    def getColumn(self, player):
+    def getColumnbis(self, player):
         sys.stdout = open(os.devnull, 'w')  # disables print
         return player.getColumn(copy.deepcopy(self.board))
 
@@ -71,7 +71,7 @@ class Game(object):
         while not self.isOver():
             player = self.players[self.currPlayer]
             try:
-                col = self.getColumn(player)
+                col = self.getColumnbis(player)
             except Exception as e:
                 col = -1
 

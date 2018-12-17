@@ -13,37 +13,36 @@ class AIPlayer(Player):
        self.name = "Timo Maszewski & Niels Hendrickx"
 
 
-
     def getColumn(self, board):
-        return maxvalue(board,5)[1]
+        return maxvalue(self,board,2)[1]
 
 
-def h(board,action) :
+
+def h(self,board) :
     return uniform(-1,1)
 
-
-def minvalue(board,prof,alpha=-2,beta=2) :
+def minvalue(self,board,prof,alpha=-2,beta=2) :
     if prof==0 :
-        return h(board)
+        return h(self,board)
     for s in board.getPossibleColumns() :
         board_bis=deepcopy(board)
-        board_bis.play(1,s)
-        if minvalue(board_bis,prof-1,alpha,beta)>=alpha :
-            alpha=minvalue(board_bis,prof-1,alpha,beta)
+        board_bis.play(-1,s)
+        if maxvalue(self,board_bis,prof-1,alpha,beta)[0]>=alpha :
+            alpha=maxvalue(self,board_bis,prof-1,alpha,beta)[0]
             choice=s
         if alpha>=beta :
             return beta
     return alpha,choice
 
 
-def maxvalue(board,prof,alpha=-1*inf,beta=inf) :
+def maxvalue(self,board,prof,alpha=-1*inf,beta=inf) :
     if prof==0 :
-        return h(board)
+        return h(self,board)
     for s in board.getPossibleColumns() :
         board_bis=deepcopy(board)
-        board_bis.play(-1,s)
-        if maxvalue(board_bis,prof-1,alpha,beta)>=alpha :
-            alpha=maxvalue(board_bis,prof-1,alpha,beta)
+        board_bis.play(1,s)
+        if minvalue(self,board_bis,prof-1,alpha,beta)[0]>=alpha :
+            alpha=minvalue(self,board_bis,prof-1,alpha,beta)[0]
             choice=s
         if alpha>=beta :
             return beta
