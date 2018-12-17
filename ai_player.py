@@ -19,10 +19,7 @@ class AIPlayer(Player):
 
 
 def h(board,action) :
-
     return uniform(-1,1)
-
-
 
 
 def minvalue(board,prof,alpha=-2,beta=2) :
